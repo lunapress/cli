@@ -1,0 +1,28 @@
+{
+    "name": "lunapress/cli",
+    "description": "CLI for development",
+    "type": "library",
+    "bin": ["bin/lunapress"],
+    "authors": [
+        {
+            "name": "Onepix",
+            "homepage": "https://onepix.net",
+            "role": "Company"
+        },
+        {
+            "name": "0zd0",
+            "role": "Lead Developer",
+            "homepage": "https://github.com/0zd0"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LunaPress\\Cli\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "symfony/console": "^v7",
+        "mustache/mustache": "^v3.0.0"
+    }
+}
