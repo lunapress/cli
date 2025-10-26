@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace LunaPress\Cli\Support;
+namespace LunaPress\Cli\Robo;
 
-use Override;
+use LunaPress\Cli\Support\IWorkingDirectory;
 
 defined('ABSPATH') || exit;
 
 final readonly class WorkingDirectory implements IWorkingDirectory
 {
-    #[Override]
     public function current(): string
     {
-        return getcwd();
+        return __DIR__ . '/../../../';
     }
 }

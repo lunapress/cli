@@ -5,9 +5,9 @@ namespace LunaPress\Cli\Frontend\Init;
 
 use LunaPress\Cli\Support\IPathResolver;
 use LunaPress\Cli\Support\PathResolver;
+use Override;
 use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Path;
 
 defined('ABSPATH') || exit;
 
@@ -19,9 +19,10 @@ final readonly class FrontendProjectGenerator implements IFrontendProjectGenerat
     ) {
     }
 
+    #[Override]
     public function generate(FrontendInitConfig $config): void
     {
-        $targetPath   = Path::join($this->pathResolver->cwd(), $config->directory);
+        $targetPath   = $this->pathResolver->frontendInitPath($config);
         $templatePath = $this->pathResolver->templates("frontend/{$config->framework->value}");
 
         $this->copyTemplate($templatePath, $targetPath);
@@ -47,6 +48,8 @@ final readonly class FrontendProjectGenerator implements IFrontendProjectGenerat
     {
         $renderer = new FrontendTemplateRenderer($targetPath, $this->filesystem);
 
-        $renderer->renderAll($config->toArray());
+        $renderer->renderAll([
+            ...$config->toTemplateArray(),
+        ]);
     }
 }
